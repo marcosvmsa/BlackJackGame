@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./scrip.js" defer></script>
+    <script src="./script.js" defer></script>
     <link rel="stylesheet" href="./style.css">
-    <title>API_cards_</title>
+    <title>BlackJack</title>
 </head>
 <body>
     <header>
@@ -18,18 +18,18 @@
     <main class="table">
         <div class="dealerTable">
             <div class="dealerImg">
-                <img src="./imgDealer.jpeg" width="150" height="120" alt="">
+                <img src="./imgDealerWidth400px.jpeg" width="400" height="220" alt="">
             </div>            
             <div id="dealer" class="">
                 <div class="imgDeal">
-                    <img id="dealer1One" class="cards" src="" width="57" height="79" alt=""> 
-                    <img id="dealer2Two" class="cards" src="" width="57" height="79" alt="">
-                    <img id="dealer3Tree" class="cards" src="" width="57" height="79" alt="">
-                    <img id="dealer4Four" class="cards" src="" width="57" height="79" alt="">
-                    <img id="dealer5Five" class="cards" src="" width="57" height="79" alt="">
-                    <img id="dealer6Six" class="cards" src="" width="57" height="79" alt="">
-                    <img id="dealer7Seven" class="cards" src="" width="57" height="79" alt="">
-                    <img id="dealer8Eight" class="cards" src="" width="57" height="79" alt="">
+                    <img id="dealer1One"   class="cards dealer1" src="" width="57" height="79" alt=""> 
+                    <img id="dealer2Two"   class="cards dealer1" src="" width="57" height="79" alt="">
+                    <img id="dealer3Tree"  class="cards dealer1" src="" width="57" height="79" alt="">
+                    <img id="dealer4Four"  class="cards dealer1" src="" width="57" height="79" alt="">
+                    <img id="dealer5Five"  class="cards dealer1" src="" width="57" height="79" alt="">
+                    <img id="dealer6Six"   class="cards dealer1" src="" width="57" height="79" alt="">
+                    <img id="dealer7Seven" class="cards dealer1" src="" width="57" height="79" alt="">
+                    <img id="dealer8Eight" class="cards dealer1" src="" width="57" height="79" alt="">
                 </div>
             </div>
             <div class="placeTheBats">
@@ -40,41 +40,43 @@
         </div>
         <div class="players borders">
             <div id="playerOne" class="grid">
-                <div class="cardsPlayer">
-                    <img id="player1One" class="cards divCardsOne divGr" src="" width="57" height="79" alt="">
-                    <img id="player1Two" class="cards divCardsTwo divGr" src="" width="57" height="79" alt="">
-                    <img id="player1Tree" class="cards divCardsTree divGr" src="" width="57" height="79" alt="">
-                    <img id="player1Four" class="cards divCardsFour divGr" src="" width="57" height="79" alt="">
-                    <img id="player1Five" class="cards divCardsFive divGr" src="" width="57" height="79" alt="">
-                    <img id="player1Six" class="cards divCardsSix divGr" src="" width="57" height="79" alt="">
-                    <img id="player1Seven" class="cards divCardsSeven divGr" src="" width="57" height="79" alt="">
-                    <img id="player1Eight" class="cards divCardsEight divGrc" src="" width="57" height="79" alt="">
+                <div class="cardsPlayer1">
+                    <img id="player1One"   class="cards player1" src="" width="57" height="79" alt="">
+                    <img id="player1Two"   class="cards player1" src="" width="57" height="79" alt="">
+                    <img id="player1Tree"  class="cards player1" src="" width="57" height="79" alt="">
+                    <img id="player1Four"  class="cards player1" src="" width="57" height="79" alt="">
+                    <img id="player1Five"  class="cards player1" src="" width="57" height="79" alt="">
+                    <img id="player1Six"   class="cards player1" src="" width="57" height="79" alt="">
+                    <img id="player1Seven" class="cards player1" src="" width="57" height="79" alt="">
+                    <img id="player1Eight" class="cards player1" src="" width="57" height="79" alt="">
                 </div>
                 <div class="coins">
+                    <h2>Coins<span class="showCoinsPlayerOne" ></span></h2>                    
                     <button class="oneC">1c</button>
                     <button class="fiveC">5c</button>
                     <button class="tenC">10c</button>                    
                 </div>
                 <div class="buttonPlayer grid">
-                    <button class="buttHit">Hit</button>
-                    <button class="buttStay">Stay</button>
-                    <button class="buttDuble">Double Down</button>
-                    <button class="buttSplit">Split</button>
-                    <button class="placeYorBat">Place your Bet</button>
+                    <button id"buttonHit class="buttHit movesOn">Hit</button>
+                    <button id"buttonHit class="buttStay movesOn">Stay</button>
+                    <button id"buttonHit class="buttDuble movesOn">Double Down</button>
+                    <button id"buttonHit class="buttSplit movesOn">Split</button>
+                    <button id"buttonHit class="placeYorBat movesOn">Place your Bet</button>
                 </div>
             </div>            
             <div id="playerTwo" class="grid">
-                <div class="cardsPlayer">
-                    <img id="player2One" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player2Two" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player2Tree" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player2Four" class="cards" src="" width="57" height="79" alt="">                
-                    <img id="player2Five" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player2Six" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player2Seven" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player2Eight" class="cards" src="" width="57" height="79" alt="">
+                <div class="cardsPlayer2">
+                    <img id="player2One"   class="cards player2" src="" width="57" height="79" alt="">
+                    <img id="player2Two"   class="cards player2" src="" width="57" height="79" alt="">
+                    <img id="player2Tree"  class="cards player2" src="" width="57" height="79" alt="">
+                    <img id="player2Four"  class="cards player2" src="" width="57" height="79" alt="">                
+                    <img id="player2Five"  class="cards player2" src="" width="57" height="79" alt="">
+                    <img id="player2Six"   class="cards player2" src="" width="57" height="79" alt="">
+                    <img id="player2Seven" class="cards player2" src="" width="57" height="79" alt="">
+                    <img id="player2Eight" class="cards player2" src="" width="57" height="79" alt="">
                 </div>
                 <div class="coins">
+                    <h2>Coins <span class="showCoinsPlayerTwo"></span></h2>
                     <button class="oneC">1c</button>
                     <button class="fiveC">5c</button>
                     <button class="tenC">10c</button>
@@ -88,27 +90,28 @@
                 </div>                
             </div>
             <div id="playerTree" class="grid">
-                <div class="cardsPlayer">
-                    <img id="player3One" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player3Two" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player3Tree" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player3Four" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player3Five" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player3Six" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player3Seven" class="cards" src="" width="57" height="79" alt="">
-                    <img id="player3Eight" class="cards" src="" width="57" height="79" alt="">                 
+                <div class="cardsPlayer3">
+                    <img id="player3One"   class="cards player3" src="" width="57" height="79" alt="">
+                    <img id="player3Two"   class="cards player3" src="" width="57" height="79" alt="">
+                    <img id="player3Tree"  class="cards player3" src="" width="57" height="79" alt="">
+                    <img id="player3Four"  class="cards player3" src="" width="57" height="79" alt="">
+                    <img id="player3Five"  class="cards player3" src="" width="57" height="79" alt="">
+                    <img id="player3Six"   class="cards player3" src="" width="57" height="79" alt="">
+                    <img id="player3Seven" class="cards player3" src="" width="57" height="79" alt="">
+                    <img id="player3Eight" class="cards player3" src="" width="57" height="79" alt="">                 
                 </div> 
                 <div class="coins">
-                    <button class="oneC">1c</button>
-                    <button class="fiveC">5c</button>
-                    <button class="tenC">10c</button>
+                    <h2>Coins<span class="showCoinsPlayerThree"></span></h2>
+                    <button class="oneC allCoinsThree">1c</button>
+                    <button class="fiveC allCoinsThree">5c</button>
+                    <button class="tenC allCoinsThree">10c</button>
                 </div>           
                 <div class="buttonPlayer grid">
-                    <button class="buttHit">Hit</button>
-                    <button class="buttStay">Stay</button>
-                    <button class="buttDuble">Double Down</button>
-                    <button class="buttSplit">Split</button>
-                    <button class="placeYorBat">Place your Bet</button>
+                    <button class="buttHit movesThree">Hit</button>
+                    <button class="buttStay movesThree">Stay</button>
+                    <button class="buttDuble movesThree">Double Down</button>
+                    <button class="buttSplit movesThree">Split</button>
+                    <button class="placeYorBat movesThree">Place your Bet</button>
                 </div>
             </div>
         </div>
@@ -117,5 +120,14 @@
     <footer>
 
     </footer>
+    <!-- popUp -->
+    <div id="popupWrapper">
+        <div class="popup">
+            <button id="closePopup">&times</button>
+            <div class="popup-content">
+                <p id="popupMessage"></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

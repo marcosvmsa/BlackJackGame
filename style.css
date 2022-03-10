@@ -1,63 +1,52 @@
-.table{
-    height: 100%;
+body{
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto ;
+
+}
+
+.dealerTable{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
 }
 
 .players {    
     height: 50vh;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-color: green;
-    display: grid;
-    grid-template-columns: auto auto auto;
-   
+    display: flex;
+    justify-content: space-around;
+    
+    text-align: center;
+    align-content: center;
+    /* display: grid;
+    grid-template-columns: auto auto auto; */
 }
 
-#dealer{
-    position:relative;
-    
-    /* font-family: Arial;
-    text-align: center;
-    width: 100%;
-    max-width: 300px;
-    margin: 10% auto;
-    padding: 0px 300px 0px 300px;
-    background: white;
-    position: relative;
-    border: 5px solid black; */
-}
-.dealerImg{
-    position:relative;
-    left: 850px;
-}
-.imgDeal{
-    width: max-content;
-    position: relative;
-    top: 10px;
-    left: 750px;
-}
 #playerOne,
 #playerTwo,
 #playerTree{
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr ;
-    /* justify-content: center;
-    align-items: center; */
-    border: 1px solid black;
-}
-.cardsPlayer{
-    position: relative;
-    left: 100px;
-    top: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction:column;
+    text-align: center;
+    align-content: center;
+    /* border: 1px solid black;  */
 }
 
 .coins{
-    position: relative;
-    left: 500px;
-    top: 20px;
-}
+    max-height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+} 
 .buttonPlayer{
-    position: relative;
-    left: 275px;
-    top: 20px;
+    max-height: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .cards{
@@ -69,150 +58,53 @@
 .fiveC,
 .tenC{
     border-radius: 100px;
+    
 }
 
 #buttonPlayerOne{
 display: flex;
 align-items: flex-end;
 }
-/* .cardsPlayer{
+
+h2{
+    font-size: 19px;
+}
+
+span{
+    padding: 0px 50px 0px 50px;
+    border: 1px solid black;
+}
+
+#popupWrapper{
     display: none;
-    margin-right: auto;
-} */
-/* .borders{
-    border: 10px solid black;
-} */
-
-
-/* .wraper{
-    border: 2px solid black;
-    padding: 100px;
-    margin-bottom: 0;
+    background: rgba(0, 0, 0, -1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-#dealer {
-    display: grid; 
-    grid-template-columns: repeat(8, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-    align-items: flex-end;
+.popup{
+    font-family: Arial;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 10% auto;
+    padding: 20px;
+    background: white;
+    position: relative;
+    border: 5px solid black;
 }
 
-.players{
-    display: grid; 
-    grid-template-columns: 3;
-    grid-row: 1;
-    padding:100px 100px 100px 0px 100px;
-    margin: 0 auto;
-    gap: 10px;
-    align-items: flex-end;
+.popup-close{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
 }
-
-.divGr{
-    padding: 10px 10px 10px 10px;
+@media(max-width: 900px) {
+    body{
+        max-width: 900px;
+    }
 }
-
-#playerOne{
-    border: 2px solid black;
-   
-    margin: o auto;
-    grid-column: 1;
-    grid-row: 4 ;
-    
-}
-.grid{
-    display: grid; 
-    padding:100px 100px 100px 0px 100px;
-    grid-template-columns: 1;
-    grid-template-rows: 4;
-    /* justify-content: center; */
-    /* gap: 10px; */
-    /* align-content: baseline; */
-/* } */
-/* .buttonPlayer{
-    grid-column: 1 / 8;
-    grid-row: 2;
-    
-}
-.buttHit{
-    grid-column: 4 ;
-    grid-row: 1;
-}
-.buttStay{
-    grid-column: 5 ;
-    grid-row: 1;
-}
-.buttDuble{
-    grid-column: 6;
-    grid-row: 1;
-}
-.buttSplit{
-    grid-column: 7 ;
-    grid-row: 1;
-}
-.divCardsOne{
-    border: 2px solid black;
-    grid-column: 1 ;
-    grid-row: 1;
-}
-.divCardsTwo{
-    border: 2px solid black; 
-    grid-column: 2;
-    grid-row:1;
-}
-.divCardsTree{
-    border: 2px solid black;
-    grid-column: 3;
-    grid-row: 1;
-}
-.divCardsFour{
-    border: 2px solid black;
-    grid-column: 4;
-    grid-row: 1;
-}
-.divCardsFive{
-    border: 2px solid black;
-    grid-column: 5;
-    grid-row: 1;
-}
-.divCardsSix{
-    border: 2px solid black;
-    grid-column: 6;
-    grid-row: 1;
-}
-.divCardsSeven{
-    border: 2px solid black;
-    grid-column: 7;
-    grid-row: 1;
-}
-.divCardsEight{
-    border: 2px solid black;
-    grid-column: 8;
-    grid-row: 1;
-} */
-/* #playerOne > div{
-    display: grid; 
-    grid-template-columns: 8;
-    grid-row: 3;
-    gap: 10px;
-    align-items: flex-end;
-} */
-
-/* #playerTwo{
-    border: 2px solid black;
-    grid-column: 2;
-    grid-row: 4;
-}
-
-#playerTree{
-    border: 2px solid black;
-    grid-column: 3;
-    grid-row: 4;
-}
-
-.cards{
-    border: 2px solid black;
-    padding: 12px 12px 12px 12px;
-    max-width: 20px;
-    max-width: 20px 
-} */
