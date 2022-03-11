@@ -11,8 +11,9 @@
 <body>
     <header>
         <div id="buttons" >
-            <button id="dealCards">Deal cards</button>
-            <button id="drawCards">Draw cards</button>
+            <h1>BlackJack</h1>
+            <!-- <button id="dealCards">Deal cards</button>
+            <button id="drawCards">Draw cards</button> -->
         </div>  
     </header>
     <main class="table">
@@ -52,16 +53,16 @@
                 </div>
                 <div class="coins">
                     <h2>Coins<span class="showCoinsPlayerOne" ></span></h2>                    
-                    <button class="oneC">1c</button>
-                    <button class="fiveC">5c</button>
-                    <button class="tenC">10c</button>                    
+                    <button class="oneC  allCoinsOne">1c</button>
+                    <button class="fiveC allCoinsOne">5c</button>
+                    <button class="tenC  allCoinsOne">10c</button>                    
                 </div>
-                <div class="buttonPlayer grid">
-                    <button id"buttonHit class="buttHit movesOn">Hit</button>
-                    <button id"buttonHit class="buttStay movesOn">Stay</button>
-                    <button id"buttonHit class="buttDuble movesOn">Double Down</button>
-                    <button id"buttonHit class="buttSplit movesOn">Split</button>
-                    <button id"buttonHit class="placeYorBat movesOn">Place your Bet</button>
+                <div class="buttonPlayer1 grid">
+                    <button disabled id="buttonHit1"   class="buttHit movesOn">Hit</button>                    
+                    <button disabled id="buttonStay1"  class="buttStay movesOn">Stay</button>
+                    <button disabled id="buttonDuble1" class="buttDuble movesOn">Double Down</button>
+                    <button disabled id="buttonSplit1" class="buttSplit movesOn">Split</button>
+                    <button id="buttonBat1" class="placeYorBat movesOn">Place your Bet</button>
                 </div>
             </div>            
             <div id="playerTwo" class="grid">
@@ -77,16 +78,16 @@
                 </div>
                 <div class="coins">
                     <h2>Coins <span class="showCoinsPlayerTwo"></span></h2>
-                    <button class="oneC">1c</button>
-                    <button class="fiveC">5c</button>
-                    <button class="tenC">10c</button>
+                    <button class="oneC  allCoinsTwo">1c</button>
+                    <button class="fiveC allCoinsTwo">5c</button>
+                    <button class="tenC  allCoinsTwo">10c</button>
                 </div>
                 <div class="buttonPlayer grid">
-                    <button class="buttHit">Hit</button>
-                    <button class="buttStay">Stay</button>
-                    <button class="buttDuble">Duble Down</button>
-                    <button class="buttSplit">Split</button>
-                    <button class="placeYorBat">Place your Bet</button>
+                    <button disabled id="buttonHit2"   class="buttHit2 movesTwo">Hit</button>
+                    <button disabled id="buttonStay2"  class="buttStay2 movesTwo">Stay</button>
+                    <button disabled id="buttonDuble2" class="buttDuble2 movesTwo">Duble Down</button>
+                    <button disabled id="buttonSplit2" class="buttSplit2 movesTwo">Split</button>
+                    <button disabled id="buttonBat2"   class="placeYorBat2 movesTwo">Place your Bet</button>
                 </div>                
             </div>
             <div id="playerTree" class="grid">
@@ -102,16 +103,16 @@
                 </div> 
                 <div class="coins">
                     <h2>Coins<span class="showCoinsPlayerThree"></span></h2>
-                    <button class="oneC allCoinsThree">1c</button>
+                    <button class="oneC  allCoinsThree">1c</button>
                     <button class="fiveC allCoinsThree">5c</button>
-                    <button class="tenC allCoinsThree">10c</button>
+                    <button class="tenC  allCoinsThree">10c</button>
                 </div>           
                 <div class="buttonPlayer grid">
-                    <button class="buttHit movesThree">Hit</button>
-                    <button class="buttStay movesThree">Stay</button>
-                    <button class="buttDuble movesThree">Double Down</button>
-                    <button class="buttSplit movesThree">Split</button>
-                    <button class="placeYorBat movesThree">Place your Bet</button>
+                    <button disabled id="buttonHit3"   class="buttHit     movesThree">Hit</button>
+                    <button disabled id="buttonStay3"  class="buttStay    movesThree">Stay</button>
+                    <button disabled id="buttonDuble3" class="buttDuble   movesThree">Double Down</button>
+                    <button disabled id="buttonSplit3" class="buttSplit   movesThree">Split</button>
+                    <button disabled id="buttonBat3"   class="placeYorBat movesThree">Place your Bet</button>
                 </div>
             </div>
         </div>
