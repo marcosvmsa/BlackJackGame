@@ -1,24 +1,25 @@
+// Space to show de coins => 
 const showCoinsPlayerOne = document.querySelector('.showCoinsPlayerOne')
 const showCoinsPlayerTwo = document.querySelector('.showCoinsPlayerTwo')
 const showCoinsPlayerThree = document.querySelector('.showCoinsPlayerThree')
-const popupWrapper = document.querySelector('#popupWrapper')
+// <=
+const popupWrapper = document.querySelector('#popupWrapper')// PopUp
+const allCards = document.querySelectorAll('.cards')//space to display the cards
+const player1 = document.querySelectorAll('.player1')//Playr 1 Table 
+const player2 = document.querySelectorAll('.player2')//Playr 2 Table 
+const player3 = document.querySelectorAll('.player3')//Playr 3 Table 
+const dealer1 = document.querySelectorAll('.dealer1')//Dealer Table 
+const movesOn = document.querySelectorAll('.movesOn')//Action Player 1 Buttons
+const movesTwo = document.querySelectorAll('.movesTwo')//Action Player 2 Buttons
+const movesThree = document.querySelectorAll('.movesThree')//Action Player 3 Buttons
+const allCoinsOne = document.querySelectorAll('.allCoinsOne')//Buttons to selectamount Player 1 
+const allCoinsTwo = document.querySelectorAll('.allCoinsTwo')//Buttons to selectamount Player 2 
+const allCoinsThree = document.querySelectorAll('.allCoinsThree')//Buttons to selectamount Player 1
 
-const allCards = document.querySelectorAll('.cards')
-const player1 = document.querySelectorAll('.player1')
-const player2 = document.querySelectorAll('.player2')
-const player3 = document.querySelectorAll('.player3')
-const dealer1 = document.querySelectorAll('.dealer1')
-const movesOn = document.querySelectorAll('.movesOn')
-const movesTwo = document.querySelectorAll('.movesTwo')
-const movesThree = document.querySelectorAll('.movesThree')
-const allCoinsOne = document.querySelectorAll('.allCoinsOne')
-const allCoinsTwo = document.querySelectorAll('.allCoinsTwo')
-const allCoinsThree = document.querySelectorAll('.allCoinsThree')
-
-movesOn[0].addEventListener('click', shuffleDraw)
-movesOn[1].addEventListener('click', shuffleDraw)
-movesOn[4].addEventListener('click', shuffleDraw)
-
+// ---------Controle-Varieble----------------------------
+let turne = `Play1`;
+let control = '';
+let whileControl = false
 // --Player Class Constructor ------------------------------------------
 class Player {
     constructor(name) {
@@ -30,67 +31,70 @@ class Player {
         this.score = 0;
         this.betValue = 0;
     }
-    addindToBoard() { this.indToBoard += 1 };
-    addCard(card) { this.hand.push(card) };
-    clearHand() {
+    addindToBoard(){ 
+        this.indToBoard += 1 
+    };
+    addCard(card){
+        this.hand.push(card)
+     };
+    clearHand(){
         this.hand = []
         this.cardImage = ``
         this.indToBoard = 0
         this.score = 0
         this.betValue = 0
     };
-    getHandScore() {
-        return this.score = this.hand.reduce((acc, card) => acc + card, 0)
+    getHandScore(){
+        this.score = this.hand.reduce((acc, card) => acc + card, 0)
+        // control.log(`this.score${this.score}`)
         // return this.hand.reduce((acc, card) => acc + card, 0)
     };
-    coninsDeduct(coin) {
-        return this.coins = this.coins - coin
+    coninsDeduct(coin){
+        this.coins = this.coins - coin
     };
     addBet(coins){
         this.betValue = this.betValue + coins
     }
     addEarnes(times){
-        this.coins = this.betValue * times + this.coins 
+        const total = this.betValue * times + this.betValue
+        this.coins = this.coins + total
     }
 }
 // --------------------------------------------
-const play1 = new Player('Player 1')
-showCoinsPlayerOne.innerHTML = play1.coins;
-const play2 = new Player('Player 2')
-showCoinsPlayerTwo.innerHTML = play2.coins;
-const play3 = new Player('Player 3')
-showCoinsPlayerThree.innerHTML = play3.coins;
-const dealer = new Player('Dealer')
-// ---------------------------------------------
+const play1 = new Player('Player 1')//Creating Player 1
+    showCoinsPlayerOne.innerHTML = play1.coins;//Money to start 
+const play2 = new Player('Player 2')//Creating Player 2
+    showCoinsPlayerTwo.innerHTML = play2.coins;//Money to start
+const play3 = new Player('Player 3')//Creating Player 3
+    showCoinsPlayerThree.innerHTML = play3.coins;//Money to start
+const dealer = new Player('Dealer')//Creating Dealer
+// -------Object for API------------------------
 const cardObj = {
     deckId: '',
     cardImage: '',
     cardSuit: '',
     cardValue: 0,
 }
-// ------------------------------------------
-let turne = `Play1`;
-let control = '';
 // --------embaralhar as cartas --------------------------
-function shuffleDraw(event) {
+function shuffleDraw(event){
     // event.preventDefault()
     if(play1.betValue === 0){
-        popUp(`you need place your bet`)
+        popUp(`You need select an amount of coins`)
     }else{
         buttonBat1.disabled = true
-        if (event.target.id === `buttonBat1`) {
-            for (let i = 0; i <= 7; i++) {
+        if(event.target.id === `buttonBat1`){
+            for(let i = 0; i <= 7; i++){
                 apiCards(`draw`);
             }
-        }else if(event.target.id === `buttonHit1`) { apiCards('buttonHit1')}
-        else if(event.target.id === `buttonStay1`) { apiCards('buttonStay1') }
+        }else if(event.target.id === `buttonHit1`){apiCards('buttonHit1')}
+         else if(event.target.id === `buttonStay1`){apiCards('buttonStay1')}
     }
 }
 // ------------API para Embaralhar/ dar as cartas/ -------------------------------------
-function apiCards(eve) {
+function apiCards(eve){
     let url;
     if (eve === `shuffle` || control !== `stop`) {
-        url = `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2`
+        url = `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=4`
         control = `stop`;
     } else if (eve === `draw` || eve === 'buttonHit1' || 
                eve === 'buttonStay1' || eve === 'returToDealerTurne'){
@@ -111,15 +115,15 @@ function apiCards(eve) {
                     cardObj.cardValue = parseInt(res.cards[0].value)
                 };
                 if(eve === `draw`){firstRound(cardObj)}
-                if(eve === 'buttonHit1'){hitPlay1(cardObj)}
-                if(eve === 'buttonStay1'){stayPlay1(cardObj)}
-                if(eve === 'returToDealerTurne'){return cardObj}
+                else if(eve === 'buttonHit1'){hitPlay1(cardObj)}
+                else if(eve === 'buttonStay1'){stayPlay1(cardObj)}
+                else if(eve === 'returToDealerTurne'){return cardObj}
             }    
         })
         .catch(err => { console.log("something went wrong...", err) });
     }
 // -----------------------------------------------------------
-function firstRound(card) {
+function firstRound(card){
     if (turne === `Play1`) {
         player1[play1.indToBoard].style.visibility = 'visible';
         player1[play1.indToBoard].setAttribute('src', card.cardImage);
@@ -163,31 +167,31 @@ function firstRound(card) {
     }
 }
 // ------------------------------------------------------------
-function checkBlack(black, player, round) {
+function checkBlack(black,player,round){
     if (round === `One`) {
         if (black === 21 && player !== `Dealer`) {
+            play1.addEarnes(1.5) 
+            showCoinsPlayerOne.innerHTML = play1.coins
             popUp(`${player} BlackJack`)
-        } else if (player === `Dealer`) {
-            if (black === 21) {return true}            
-        }
-    } else if (round === `Two`){
-        if(black > 21){
-            popUpBust(`Bust`)
-        }if(black === 21 && player === `Player 1`){
+            if(player ===`Player 1`){
+                setTimeout(() => restart(), 2000);
+            }
+        } 
+    } else if(round === `Two`){
+        if(black > 21){popUpBust(`Bust`)}
+        else if(black === 21 && player === `Player 1`){
             dealerTurne()
         }
     }
 }
 // ----------------------------------------------------------------
-function turneTheCard() {
+function turneTheCard(){
     if (dealer.hand[1] === 11) {
         popUpInsirance(`would you like insurance`)
-        if (checkBlack(dealer.score, `Dealer`, `One`)) {
+        if(dealer.score === 21){
             dealer1[0].setAttribute('src', dealer.cardImage);
-            setTimeout(() => {
-                restart()
-            }, 2000);
-        } else {
+            setTimeout(() => {restart()}, 2000);
+        }else{
             movesOn.forEach(a => a.disabled = false)
             buttonBat1.disabled = true
         }
@@ -197,7 +201,7 @@ function turneTheCard() {
     }
 }
 // ----Button to Hit------------------------------------------------------------
-function hitPlay1(card) {
+function hitPlay1(card){
     player1[play1.indToBoard].style.visibility = 'visible';
     player1[play1.indToBoard].setAttribute('src', card.cardImage);
     play1.addCard(card.cardValue);
@@ -206,43 +210,49 @@ function hitPlay1(card) {
     checkBlack(play1.score, `Player 1`, `Two`);
 }
 // ---button to stay -------------------------------------------------------------
-function stayPlay1() {
-    // deler mostra a carta
-    dealer1[0].setAttribute('src', dealer.cardImage)
-    // caucula o score 
+function stayPlay1(){
+    dealer1[0].setAttribute('src', dealer.cardImage)// deler mostra a carta
+    dealer.getHandScore()// caucula o score
     dealerTurne()
 }
 // ----------------------------------------------------------------
-let whileControl = false
 function dealerTurne(){
     while (whileControl !== true) {
-        apiCards(`returToDealerTurne`)
-        dealer1[dealer.indToBoard].style.visibility = 'visible';
-        dealer1[dealer.indToBoard].setAttribute('src', cardObj.cardImage);
-        dealer.addCard(cardObj.cardValue);
-        dealer.getHandScore();
-        dealer.addindToBoard()
-
-        if(dealer.score >= play1.score ){
-            popUpWin(`Dealer Win`)
-            whileControl = true}
         if(dealer.score > 21){ 
+            play1.addEarnes(1) 
+            showCoinsPlayerOne.innerHTML = play1.coins
             popUpBust(`Dealer Bust`)
             whileControl = true
+            break
         }
-        if(dealer.score >= play1.score){
+        else if(dealer.score > play1.score){
+            popUpWin(`Dealer Win`)
+            whileControl = true
+            break
+        }
+        else if(dealer.score === play1.score){
             popUpWin(`Draw`)
             whileControl = true
+            break
+        }else{
+            dealer1[dealer.indToBoard].style.visibility = 'visible';
+            dealer1[dealer.indToBoard].setAttribute('src', cardObj.cardImage);
+            dealer.addCard(cardObj.cardValue);
+            dealer.getHandScore();
+            dealer.addindToBoard()
+            console.log(dealer.score)
+            apiCards(`returToDealerTurne`)
         }
     }  
+    
 }
-function dobuleDowPlay1(card) {
+function dobuleDowPlay1(card){
     // player1[play1.indToBoard].style.visibility = 'visible';
     // player1[play1.indToBoard].setAttribute('src', card.cardImage);
     // play1.addCard(card.cardValue);
 }
 // ----pop Up -------------------------------
-function popUp(msg) {
+function popUp(msg){
     popupWrapper.style.display = 'block';
     popupMessage.innerHTML = msg;
     closePopup.addEventListener('click', () => {
@@ -250,7 +260,7 @@ function popUp(msg) {
     })
 };
 // ----pop Up -------------------------------
-function popUpWin(msg) {
+function popUpWin(msg){
     popupWrapper.style.display = 'block';
     popupMessage.innerHTML = msg;
     closePopup.addEventListener('click', () => {
@@ -259,31 +269,30 @@ function popUpWin(msg) {
     })
 };
 // ----pop Up -- bust-----------------------------
-function popUpBust(msg) {
+function popUpBust(msg){
     popupWrapper.style.display = 'block';
     popupMessage.innerHTML = msg;
     closePopup.addEventListener('click', () => {
         popupWrapper.style.display = 'none';
-        setTimeout(() => {dealer1[0].setAttribute('src', dealer.cardImage)}, 1000);
+        // setTimeout(() => {dealer1[0].setAttribute('src', dealer.cardImage)}, 1000);
         restart()
     })
 };
 // ----pop Up - insurance ------------------------------
-function popUpInsirance(msg) {
+function popUpInsirance(msg){
     popupWrapper.style.display = 'block';
     popupMessage.innerHTML = msg;
-    setTimeout(() => {
-        popupWrapper.style.display = 'none';
-    }, 2000);
+    setTimeout(()=>popupWrapper.style.display = 'none', 2000);
 };
 // ----Restart ------------------------------
-function restart() {
+function restart(){
 
     play1.clearHand()
     // =>this is not meant to be here - just for testing
     play2.clearHand()
     play3.clearHand()
     dealer.clearHand()
+    whileControl = false
     // <=
     turne = `Play1`;
     //=> moving the control to "0" allows me to have a new key for a new shuffled deck
@@ -297,54 +306,58 @@ function restart() {
     buttonBat1.disabled = false
 };
 // -------------------------------------------------
-allCoinsOne[0].addEventListener('click', () => {
+allCoinsOne[0].addEventListener('click',()=>{
     play1.coninsDeduct(1);
     play1.addBet(1)
     showCoinsPlayerOne.innerHTML = play1.coins;
 })
-allCoinsOne[1].addEventListener('click', () => {
+allCoinsOne[1].addEventListener('click',()=>{
     play1.coninsDeduct(5);
     play1.addBet(5)
     showCoinsPlayerOne.innerHTML = play1.coins;
 })
-allCoinsOne[2].addEventListener('click', () => {
+allCoinsOne[2].addEventListener('click',()=>{
     play1.coninsDeduct(10);
     play1.addBet(10)
     showCoinsPlayerOne.innerHTML = play1.coins;
 })
 
-allCoinsTwo[0].addEventListener('click', () => {
+allCoinsTwo[0].addEventListener('click',()=>{
     play2.coninsDeduct(1);
     play2.addBet(1)
     showCoinsPlayerTwo.innerHTML = play2.coins;
 
 })
-allCoinsTwo[1].addEventListener('click', () => {
+allCoinsTwo[1].addEventListener('click',()=>{
     play2.coninsDeduct(5);
     play2.addBet(5)
     showCoinsPlayerTwo.innerHTML = play2.coins;
 })
-allCoinsTwo[2].addEventListener('click', () => {
+allCoinsTwo[2].addEventListener('click',()=>{
     play2.coninsDeduct(10);
     play2.addBet(10)
     showCoinsPlayerTwo.innerHTML = play2.coins;
 })
 
-allCoinsThree[0].addEventListener('click', () => {
+allCoinsThree[0].addEventListener('click',()=>{
     play3.coninsDeduct(1);
     play3.addBet(1)
     showCoinsPlayerThree.innerHTML = play3.coins;
 
 })
-allCoinsThree[1].addEventListener('click', () => {
+allCoinsThree[1].addEventListener('click',()=>{
     play3.coninsDeduct(5);
     play3.addBet(5)
     showCoinsPlayerThree.innerHTML = play3.coins;
 })
-allCoinsThree[2].addEventListener('click', () => {
+allCoinsThree[2].addEventListener('click',()=>{
     play3.coninsDeduct(10);
     play3.addBet(10)
     showCoinsPlayerThree.innerHTML = play3.coins;
 })
+// ------------------------------------------------
+movesOn[0].addEventListener('click', shuffleDraw)
+movesOn[1].addEventListener('click', shuffleDraw)
+movesOn[4].addEventListener('click', shuffleDraw)
 // chamando a API para embaralhar comeco do jogo
 apiCards(`shuffle`)
