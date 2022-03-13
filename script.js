@@ -111,7 +111,6 @@ function apiCards(eve){
             if(eve === `shuffle`){
                 return cardObj.deckId = res.deck_id
             }else if(eve === `draw`|| eve === 'buttonHit1'||eve === 'buttonStay1'|| eve === 'returToDealerTurne') {
-                console.log(res.cards)
                 cardObj.cardImage = res.cards[0].image;
                 cardObj.cardSuit = res.cards[0].suit;
                 if( res.cards[0].value === "JACK" || res.cards[0].value === "QUEEN" || res.cards[0].value === "KING") {
@@ -175,7 +174,6 @@ function firstRound(card){
             dealer.addCard(card.cardValue);            
             dealer.getHandScore();
             if(dealer.findAce() && dealer.score > 21){
-                console.log(`im here play1`)
                 dealer.addAceOne()
                 dealer.getHandScore();
             }
@@ -234,10 +232,7 @@ function hitPlay1(card){
     $player1[play1.indToBoard].setAttribute('src', card.cardImage);
     play1.addCard(card.cardValue);
     play1.getHandScore();
-    console.log(` Playe 1 Turne=> Dealer ${dealer.score} === P${play1.score}`)
-    console.log(play1.hand)
     if(play1.findAce() && play1.score > 21){
-        console.log(`im here play1`)
         play1.addAceOne()
         play1.getHandScore();
     }
@@ -253,9 +248,6 @@ function stayPlay1(){
 // ----------------------------------------------------------------
 function dealerTurne(){
     while (whileControl !== true) {
-        console.log(` dealer Turne => D${dealer.score} === P${play1.score}`)
-        console.log(dealer.hand)
-
         if(dealer.score > 21){ 
             play1.addEarnes(1) 
             showCoinsPlayerOne.innerHTML = play1.coins
@@ -280,7 +272,6 @@ function dealerTurne(){
             dealer.addCard(cardObj.cardValue);
             dealer.getHandScore();
             if(dealer.hand.includes(11) && dealer.score > 21){
-                console.log(`im here dealer `)
                 dealer.addAceOne()
                 dealer.getHandScore();
             }
