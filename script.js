@@ -4,8 +4,9 @@ const showCoinsPlayerTwo = document.querySelector('.showCoinsPlayerTwo')
 const showCoinsPlayerThree = document.querySelector('.showCoinsPlayerThree')
 // <=
 const popupWrapper = document.querySelector('#popupWrapper')// PopUp
-const allCards = document.querySelectorAll('.cards')//space to display the cards
-const player1 = document.querySelectorAll('.player1')//Playr 1 Table 
+
+const $allCards = $('.cards')//space to display the cards
+const $player1 = $('.player1')//Playr 1 Table 
 const player2 = document.querySelectorAll('.player2')//Playr 2 Table 
 const player3 = document.querySelectorAll('.player3')//Playr 3 Table 
 const dealer1 = document.querySelectorAll('.dealer1')//Dealer Table 
@@ -38,16 +39,14 @@ class Player {
         this.hand.push(card)
      };
     clearHand(){
-        this.hand = []
-        this.cardImage = ``
-        this.indToBoard = 0
-        this.score = 0
-        this.betValue = 0
+        this.hand = [];
+        this.cardImage = ``;
+        this.indToBoard = 0;
+        this.score = 0;
+        this.betValue = 0;
     };
     getHandScore(){
         this.score = this.hand.reduce((acc, card) => acc + card, 0)
-        // control.log(`this.score${this.score}`)
-        // return this.hand.reduce((acc, card) => acc + card, 0)
     };
     coninsDeduct(coin){
         this.coins = this.coins - coin
@@ -59,6 +58,13 @@ class Player {
         const total = this.betValue * times + this.betValue
         this.coins = this.coins + total
     }
+    findAce(){
+        return this.hand.includes(11)
+    }
+    addAceOne(){
+        this.hand[this.hand.indexOf(11)] = 1
+    }
+    
 }
 // --------------------------------------------
 const play1 = new Player('Player 1')//Creating Player 1
@@ -105,12 +111,14 @@ function apiCards(eve){
             if(eve === `shuffle`){
                 return cardObj.deckId = res.deck_id
             }else if(eve === `draw`|| eve === 'buttonHit1'||eve === 'buttonStay1'|| eve === 'returToDealerTurne') {
+                console.log(res.cards)
                 cardObj.cardImage = res.cards[0].image;
                 cardObj.cardSuit = res.cards[0].suit;
-                if(buttonBat1.disabled = true === "JACK" || res.cards[0].value === "QUEEN" || res.cards[0].value === "KING") {
+                if( res.cards[0].value === "JACK" || res.cards[0].value === "QUEEN" || res.cards[0].value === "KING") {
                     cardObj.cardValue = 10;
                 }else if(res.cards[0].value === "ACE"){
                     cardObj.cardValue = 11;
+                    cardObj.contAce = `yes`
                 }else{
                     cardObj.cardValue = parseInt(res.cards[0].value)
                 };
@@ -125,9 +133,13 @@ function apiCards(eve){
 // -----------------------------------------------------------
 function firstRound(card){
     if (turne === `Play1`) {
-        player1[play1.indToBoard].style.visibility = 'visible';
-        player1[play1.indToBoard].setAttribute('src', card.cardImage);
-        play1.addCard(card.cardValue)
+        $player1[play1.indToBoard].style.visibility = 'visible';
+        $player1[play1.indToBoard].setAttribute('src', card.cardImage);
+        if(play1.findAce() && card.cardValue === 11){
+            play1.addCard(1)
+        }else{
+            play1.addCard(card.cardValue)
+        }
         play1.getHandScore()
         checkBlack(play1.score, `Player 1`, `One`)
         play1.addindToBoard()
@@ -135,7 +147,11 @@ function firstRound(card){
     } else if (turne === `Play2`) {
         player2[play2.indToBoard].style.visibility = 'visible';
         player2[play2.indToBoard].setAttribute('src', card.cardImage)
-        play2.addCard(card.cardValue)
+        if(play1.findAce() && card.cardValue === 11){
+            play2.addCard(1)
+        }else{            
+            play2.addCard(card.cardValue)
+        }
         play2.getHandScore()
         checkBlack(play2.score, `Player 2`, `One`)
         play2.addindToBoard()
@@ -143,6 +159,11 @@ function firstRound(card){
     } else if (turne === `Play3`) {
         player3[play3.indToBoard].style.visibility = 'visible';
         player3[play3.indToBoard].setAttribute('src', card.cardImage);
+        if(play1.findAce() && card.cardValue === 11){
+            play3.addCard(1)
+        }else{
+            play3.addCard(card.cardValue)
+        }
         play3.getHandScore();
         checkBlack(play1.score, `Player 3`, `One`);
         play3.addindToBoard()
@@ -151,8 +172,13 @@ function firstRound(card){
         if (dealer.indToBoard === 1) {
             dealer1[dealer.indToBoard].style.visibility = 'visible';
             dealer1[dealer.indToBoard].setAttribute('src', card.cardImage);
-            dealer.addCard(card.cardValue);
+            dealer.addCard(card.cardValue);            
             dealer.getHandScore();
+            if(dealer.findAce() && dealer.score > 21){
+                console.log(`im here play1`)
+                dealer.addAceOne()
+                dealer.getHandScore();
+            }
             dealer.addindToBoard()
             turneTheCard()
         } else {
@@ -160,6 +186,7 @@ function firstRound(card){
             dealer1[dealer.indToBoard].setAttribute('src', './backCard.jpeg');
             dealer.cardImage = card.cardImage;
             dealer.addCard(card.cardValue);
+            dealer.contAce = card.contAce
             dealer.getHandScore();
             dealer.addindToBoard()
         }
@@ -170,14 +197,15 @@ function firstRound(card){
 function checkBlack(black,player,round){
     if (round === `One`) {
         if (black === 21 && player !== `Dealer`) {
-            play1.addEarnes(1.5) 
+            play1.addEarnes(1.5);
             showCoinsPlayerOne.innerHTML = play1.coins
-            popUp(`${player} BlackJack`)
+            popUp(`${player} BlackJack`);
             if(player ===`Player 1`){
                 setTimeout(() => restart(), 2000);
             }
         } 
     } else if(round === `Two`){
+
         if(black > 21){popUpBust(`Bust`)}
         else if(black === 21 && player === `Player 1`){
             dealerTurne()
@@ -202,11 +230,18 @@ function turneTheCard(){
 }
 // ----Button to Hit------------------------------------------------------------
 function hitPlay1(card){
-    player1[play1.indToBoard].style.visibility = 'visible';
-    player1[play1.indToBoard].setAttribute('src', card.cardImage);
+    $player1[play1.indToBoard].style.visibility = 'visible';
+    $player1[play1.indToBoard].setAttribute('src', card.cardImage);
     play1.addCard(card.cardValue);
-    play1.addindToBoard()
     play1.getHandScore();
+    console.log(` Playe 1 Turne=> Dealer ${dealer.score} === P${play1.score}`)
+    console.log(play1.hand)
+    if(play1.findAce() && play1.score > 21){
+        console.log(`im here play1`)
+        play1.addAceOne()
+        play1.getHandScore();
+    }
+    play1.addindToBoard();
     checkBlack(play1.score, `Player 1`, `Two`);
 }
 // ---button to stay -------------------------------------------------------------
@@ -218,6 +253,9 @@ function stayPlay1(){
 // ----------------------------------------------------------------
 function dealerTurne(){
     while (whileControl !== true) {
+        console.log(` dealer Turne => D${dealer.score} === P${play1.score}`)
+        console.log(dealer.hand)
+
         if(dealer.score > 21){ 
             play1.addEarnes(1) 
             showCoinsPlayerOne.innerHTML = play1.coins
@@ -231,6 +269,8 @@ function dealerTurne(){
             break
         }
         else if(dealer.score === play1.score){
+            play1.coins += play1.betValue
+            showCoinsPlayerOne.innerHTML = play1.coins
             popUpWin(`Draw`)
             whileControl = true
             break
@@ -239,8 +279,12 @@ function dealerTurne(){
             dealer1[dealer.indToBoard].setAttribute('src', cardObj.cardImage);
             dealer.addCard(cardObj.cardValue);
             dealer.getHandScore();
+            if(dealer.hand.includes(11) && dealer.score > 21){
+                console.log(`im here dealer `)
+                dealer.addAceOne()
+                dealer.getHandScore();
+            }
             dealer.addindToBoard()
-            console.log(dealer.score)
             apiCards(`returToDealerTurne`)
         }
     }  
@@ -298,10 +342,14 @@ function restart(){
     //=> moving the control to "0" allows me to have a new key for a new shuffled deck
     control = '';
     apiCards(`shuffle`)
-    allCards.forEach(e => {
-        e.style.visibility = `hidden`
-        e.setAttribute('src', '');
+    $allCards.each(e => {
+        $allCards[e].style.visibility = `hidden`
+        $allCards[e].setAttribute('src', '');
     })
+    // allCards.forEach(e => {
+    //     e.style.visibility = `hidden`
+    //     e.setAttribute('src', '');
+    // })
     movesOn.forEach(e => e.disabled = true)
     buttonBat1.disabled = false
 };
