@@ -22,9 +22,7 @@ h1{
     display: flex;
     justify-content: space-around;    
     text-align: center;
-    align-content: center;
-    /* display: grid;
-    grid-template-columns: auto auto auto; */
+    align-content: center;    
 }
 
 #playerOne,
@@ -38,7 +36,7 @@ h1{
     /* border: 1px solid black;  */
 }
 
-.coins{
+.wrapperCoins{
     max-height: 30px;
     display: flex;
     justify-content: space-around;
@@ -54,9 +52,11 @@ h1{
 
 .cards{
     visibility: hidden;
+    /* margin-left: -20px; */
+}
+.cards + .cards{
     margin-left: -20px;
 }
-
 .oneC,
 .fiveC,
 .tenC{
@@ -105,8 +105,59 @@ span{
     right: 10px;
     cursor: pointer;
 }
+
 @media(max-width: 500px) {
     body{
         max-width: 900px;
     }
 }
+.cardsPlayer1{
+    position: relative;
+    
+}
+
+.split{
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    width: 100%;
+    height: 100px;    
+    background-color: #ffffff70;
+}
+
+.split1, 
+.split2,
+.buttonsSplit{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: end;
+    margin-left: 2%;
+    width: 25%;
+    height: 150%;
+}
+
+.wrapperSplitButtons{
+    align-self: center ;
+    width: 100%;    
+}
+
+.cardsSplit + .cardsSplit{
+    margin-left: -20px;
+}
+
+.cardsSplit{
+    visibility: hidden;
+}
+.split1{
+    margin-bottom: 8px;
+}
+
+/* Isso tem que acontecer quando fizer o split  */
+/* .coins,
+.buttonPlayer1{
+    pointer-events: none;
+    opacity: 0.1;
+} */
