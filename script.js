@@ -324,22 +324,31 @@ function dobuleDow(card) {
     dealerTurne()
 }
 // ----Button Split------------------------------------------------------------
+let atrA;
 function screenHit() {
+    let atr = (a)=>  a = $player1[0].getAttribute(src)
+    atrA = atr
+    console.log(atrA)
     splitPlay1 = new SplitObj(play1.name)
     $coins1[0].style.opacity = 0.1;
     $coins1[0].style.pointerEvents = "none"
     $split[0].style.visibility = 'visible';
-
+    
     $cardsSplit1[0].style.visibility = 'visible';
-    $cardsSplit1[0].setAttribute('src', $player1[0].attributes.src);
+    // $cardsSplit1[0].setAttribute('src', $player1[0].attributes.src);
+    $cardsSplit1[0].setAttribute('src', atr);
+    
     $cardsSplit2[0].style.visibility = 'visible';
     $cardsSplit2[0].setAttribute('src', $player1[1].attributes.src);
-    $split2[0].style.opacity = 0.1;
+    console.log($cardsSplit2[0])
+    $split2[0].style.opacity = 0.3;
 
     splitPlay1.addSplitCard(play1.hand[1])
     play1.hand.pop();
     play1.indToBoard = 1;
-
+    // console.log($cardsSplit1[0].attributes.src)
+    // console.log(atr)//apagar
+    // console.log($player1[0].getAttribute(src))//apagar
     return splitPlay1;
 }
 
@@ -413,7 +422,7 @@ function dealerTurne() {
             }
         } else if (dealer.score === 21 && dealer.score !== play1.score
             || dealer.score > play1.score) {
-            popUpWin('Dealer Won')
+            popUpWin('The Dealer Won')
         } else if (dealer.score === play1.score) {
             play1.coins += play1.betValue
             showCoinsPlayerOne.innerHTML = play1.coins
@@ -422,7 +431,7 @@ function dealerTurne() {
             // rever pagamento do player 
             // play1.coins += play1.betValue
             showCoinsPlayerOne.innerHTML = play1.coins
-            popUpWin(`Draw`)
+            popUpWin(`The ${play1.name} Won`)
         }
     }
 
@@ -558,15 +567,17 @@ allCoinsThree[2].addEventListener('click', () => {
 movesOn[0].addEventListener('click', shuffleDraw)
 movesOn[1].addEventListener('click', shuffleDraw)
 movesOn[2].addEventListener('click', shuffleDraw)
-movesOn[3].addEventListener('click', shuffleDraw)
 movesOn[4].addEventListener('click', shuffleDraw)
+// movesOn[3].addEventListener('click', shuffleDraw)
+movesOn[3].addEventListener('click',screenHit)
 
-movesSplit[0].addEventListener('click', shuffleDraw)
-movesSplit[1].addEventListener('click', shuffleDraw)
-movesSplit[2].addEventListener('click', shuffleDraw)
 
-// movesSplit.forEach(e => console.log(e.addEventListener('click', shuffleDraw)))
-// console.log(movesSplit)
+movesSplit.forEach(e => console.log(e.addEventListener('click', shuffleDraw)))
+// movesSplit[0].addEventListener('click', shuffleDraw)
+// movesSplit[1].addEventListener('click', shuffleDraw)
+// movesSplit[2].addEventListener('click', shuffleDraw)
+
+
 
 // chamando a API para embaralhar comeco do jogo
 apiCards(`shuffle`)

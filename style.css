@@ -2,12 +2,13 @@ body{
     max-width: 100%;
     max-height: 100%;
     margin: 0 auto ;
-
 }
+
 h1{
     align-items: center;
     text-align: center;
 }
+
 .dealerTable{
     display: flex;
     justify-content: space-between;
@@ -33,7 +34,6 @@ h1{
     flex-direction:column;
     text-align: center;
     align-content: center;
-    /* border: 1px solid black;  */
 }
 
 .wrapperCoins{
@@ -52,11 +52,12 @@ h1{
 
 .cards{
     visibility: hidden;
-    /* margin-left: -20px; */
 }
+
 .cards + .cards{
     margin-left: -20px;
 }
+
 .oneC,
 .fiveC,
 .tenC{
@@ -64,8 +65,8 @@ h1{
 }
 
 #buttonPlayerOne{
-display: flex;
-align-items: flex-end;
+    display: flex;
+    align-items: flex-end;
 }
 
 h2{
@@ -106,14 +107,9 @@ span{
     cursor: pointer;
 }
 
-@media(max-width: 500px) {
-    body{
-        max-width: 900px;
-    }
-}
+
 .cardsPlayer1{
-    position: relative;
-    
+    position: relative;    
 }
 
 .split{
@@ -151,10 +147,30 @@ span{
 .cardsSplit{
     visibility: hidden;
 }
+
 .split1{
     margin-bottom: 8px;
 }
-
+@media (max-width: 1003px) {
+    
+    .players{
+        background-color: green;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;    
+        text-align: center;
+        align-content: center;
+    }
+    .dealerTable{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-direction: column;
+        text-align: center;
+        background-color: green;
+    }
+   
+}
 /* Isso tem que acontecer quando fizer o split  */
 /* .coins,
 .buttonPlayer1{
