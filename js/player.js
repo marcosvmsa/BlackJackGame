@@ -3,7 +3,7 @@ class Player {
     constructor(name) {
         this.name = name;
         this.hand = [];
-        this.coins = 1000;
+        this.coins = 0;
         this.cardImage = ``;
         this.indToBoard = 0;
         this.score = 0;
@@ -23,6 +23,7 @@ class Player {
         this.indToBoard = 0;
         this.score = 0;
         this.betValue = 0;
+        this.coins = this.coins
     };
     getHandScore() {
         this.score = this.hand.reduce((acc, card) => acc + card, 0)
@@ -32,13 +33,16 @@ class Player {
         this.coins = this.coins - coin
     };
     addBet(coins) {
-        this.betValue = this.betValue + coins
+        this.betValue = coins
+        console.log(this.betValue)
     }
     
     addEarnes(times) {
-        const total = this.betValue * times + this.betValue
-        this.coins = this.coins + total
+        // const total = this.betValue * times 
+        this.betValue = this.betValue * times 
+        this.coins += this.betValue
     }
+
     findAce() {
         return this.hand.includes(11)
     }

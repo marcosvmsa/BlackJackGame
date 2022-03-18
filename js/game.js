@@ -1,5 +1,6 @@
 // --------------------------------------------
 const play1 = new Player('Player 1')//Creating Player 1
+play1.coins = 1000;
 showCoinsPlayerOne.innerHTML = play1.coins;//Money to start 
 const play2 = new Player('Player 2')//Creating Player 2
 showCoinsPlayerTwo.innerHTML = play2.coins;//Money to start
@@ -120,10 +121,9 @@ function firstRound(card) {
 }
 // ------------------------------------------------------------
 function checkBlack(black, player, round) {
+    console.log(` checkBlack = ${play1.coins}`)
     if (round === `One`) {
         if (black === 21 && player !== `Dealer`) {
-            play1.addEarnes(1);
-            showCoinsPlayerOne.innerHTML = play1.coins
             popUp(`${player} BlackJack`);
             turneTheCard()
             apiCards('returToDealerTurne')       
@@ -136,6 +136,7 @@ function checkBlack(black, player, round) {
                 if (play1.score > 21) {
                     popUpWin(`Tie`)
                 } else {
+                    console.log(`bust if `)
                     play1.addEarnes(1);
                     showCoinsPlayerOne.innerHTML = play1.coins
                     popUpWin(` Dealer Bust`)
@@ -144,10 +145,12 @@ function checkBlack(black, player, round) {
                 || dealer.score > play1.score) {
                 popUpWin('The Dealer Win')
             } else if (dealer.score === play1.score) {
+                console.log(`if dealer.score === play1.score`)                
                 play1.coins += play1.betValue
                 showCoinsPlayerOne.innerHTML = play1.coins
                 popUpWin(`Tie`)
             } else if (dealer.score < play1.score) {
+                console.log(`if dealer.score < play1.score`)                
                 play1.addEarnes(1);
                 showCoinsPlayerOne.innerHTML = play1.coins
                 popUpWin(`The ${play1.name} Win`)
@@ -162,7 +165,7 @@ function turneTheCard(time) {
             popUpInsirance(`would you like insurance`)
             if (dealer.score === 21) {
                 dealer1[0].setAttribute('src', dealer.cardImage);
-                setTimeout(() => { restart() }, 2000);
+                setTimeout(() => { restart() }, 4000);
             } else {
                 movesOn.forEach(a => a.disabled = false);
                 buttonBat1.disabled = true;
