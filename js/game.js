@@ -1,109 +1,3 @@
-// Space to show de coins => 
-const $playerOne = $('#playerOne')//space to display the cards
-const showCoinsPlayerOne = document.querySelector('.showCoinsPlayerOne')
-const showCoinsPlayerTwo = document.querySelector('.showCoinsPlayerTwo')
-const showCoinsPlayerThree = document.querySelector('.showCoinsPlayerThree')
-// <=
-const popupWrapper = document.querySelector('#popupWrapper')// PopUp
-const $allCards = $('.cards')//space to display the cards
-const $player1 = $('.player1')//Playr 1 Table 
-const $coins1 = $('.coins1')//
-const $split = $('.split')//
-const $cardsSplit = $('.cardsSplit')//
-const $cardsSplit1 = $('.cardsSplit1')//
-const $split1 = $('.split1')// 
-const $split2 = $('.split2')// 
-const movesSplit = document.querySelectorAll('.movesSplit')// 
-const $cardsSplit2 = $('.cardsSplit2')//butao Split  
-const $buttonPlayer1 = $('.buttonPlayer1')//butao Split  
-const player2 = document.querySelectorAll('.player2')//Playr 2 Table 
-const player3 = document.querySelectorAll('.player3')//Playr 3 Table 
-const dealer1 = document.querySelectorAll('.dealer1')//Dealer Table 
-const movesOn = document.querySelectorAll('.movesOn')//Action Player 1 Buttons
-const movesTwo = document.querySelectorAll('.movesTwo')//Action Player 2 Buttons
-const movesThree = document.querySelectorAll('.movesThree')//Action Player 3 Buttons
-const allCoinsOne = document.querySelectorAll('.allCoinsOne')//Buttons to selectamount Player 1 
-const allCoinsTwo = document.querySelectorAll('.allCoinsTwo')//Buttons to selectamount Player 2 
-const allCoinsThree = document.querySelectorAll('.allCoinsThree')//Buttons to selectamount Player 1
-const playerTwo = document.querySelector('#playerTwo')//
-const playerTree = document.querySelector('#playerTree')//
-
-// ---------Controle-Varieble----------------------------
-let turne = `Play1`;
-let control = '';
-let splitPlay1;
-let splitCont = 1;
-// --Player Class Constructor ------------------------------------------
-class Player {
-    constructor(name) {
-        this.name = name;
-        this.hand = [];
-        this.coins = 1000;
-        this.cardImage = ``;
-        this.indToBoard = 0;
-        this.score = 0;
-        this.betValue = 0;
-    }
-    addindToBoard() {
-        this.indToBoard += 1
-    };
-
-    addCard(card) {
-        this.hand.push(card)
-    };
-
-    clearHand() {
-        this.hand = [];
-        this.cardImage = ``;
-        this.indToBoard = 0;
-        this.score = 0;
-        this.betValue = 0;
-    };
-    getHandScore() {
-        this.score = this.hand.reduce((acc, card) => acc + card, 0)
-    };
-
-    coninsDeduct(coin) {
-        this.coins = this.coins - coin
-    };
-    addBet(coins) {
-        this.betValue = this.betValue + coins
-    }
-    addEarnes(times) {
-        const total = this.betValue * times + this.betValue
-        this.coins = this.coins + total
-    }
-    findAce() {
-        return this.hand.includes(11)
-    }
-    addAceOne() {
-        this.hand[this.hand.indexOf(11)] = 1
-    }
-}
-// ------- Split Object------------------------
-class SplitObj {
-    constructor(name) {
-        this.splitCont = 1;
-        this.indiceSplit = 1;
-        this.splitHand = [];
-        this.splitScore = 0;
-    }
-    addIndiceSplit() {
-        this.indiceSplit += 1
-    };
-    addSplitCard(value) {
-        this.splitHand.push(value)
-    };
-    splitHandScore() {
-        this.score = this.splitHand.reduce((acc, card) => acc + card, 0)
-    }
-    splitFindAce() {
-        return this.splitHand.includes(11)
-    }
-    addSplitAceOne() {
-        this.hand[this.splitHand.indexOf(11)] = 1
-    }
-}
 // --------------------------------------------
 const play1 = new Player('Player 1')//Creating Player 1
 showCoinsPlayerOne.innerHTML = play1.coins;//Money to start 
@@ -119,7 +13,6 @@ const cardObj = {
     cardSuit: '',
     cardValue: 0,
 }
-
 // --------embaralhar as cartas --------------------------
 function shuffleDraw(event) {
     event.preventDefault()
@@ -127,6 +20,7 @@ function shuffleDraw(event) {
         popUpNoBet(`You need select an amount of coins`)
     } else {
         buttonBat1.disabled = true
+        allCoinsOne.forEach(a => a.disabled = true)
         if (event.target.id === `buttonBat1`) {
             for (let i = 0; i <= 7; i++) {
                 apiCards(`draw`);
@@ -189,7 +83,7 @@ function firstRound(card) {
         player2[play2.indToBoard].setAttribute('src', card.cardImage)
         play2.addCard(card.cardValue)
         play2.getHandScore()
-        checkBlack(play2.score, play2.name, `One`)
+        // checkBlack(play2.score, play2.name, `One`)
         play2.addindToBoard()
         turne = `Play3`
     } else if (turne === `Play3`) {
@@ -197,7 +91,7 @@ function firstRound(card) {
         player3[play3.indToBoard].setAttribute('src', card.cardImage);
         play3.addCard(card.cardValue)
         play3.getHandScore();
-        checkBlack(play1.score, play3.name, `One`);
+        // checkBlack(play1.score, play3.name, `One`);
         play3.addindToBoard()
         turne = `Dealer`;
     } else if (turne === `Dealer`) {
@@ -228,15 +122,12 @@ function firstRound(card) {
 function checkBlack(black, player, round) {
     if (round === `One`) {
         if (black === 21 && player !== `Dealer`) {
-            play1.addEarnes(1.5);
-            showCoinsPlayerOne.innerHTML = play1.coins
-            popUp(`${player} BlackJack`);//aqui            
+            popUp(`${player} BlackJack`);
+            turneTheCard()
+            apiCards('returToDealerTurne')       
         }
     } else if (round === `Two`) {
         if (black > 21) { popUpBust(`Bust`) }
-        else if (black === 21 && player === `Player 1`) {
-            dealerTurne()
-        }
     } else if (round === `dealerTurne`) {
         if (dealer.score >= 17) {
             if (dealer.score > 21) {
@@ -249,24 +140,18 @@ function checkBlack(black, player, round) {
                 }
             } else if (dealer.score === 21 && dealer.score !== play1.score
                 || dealer.score > play1.score) {
-                showCoinsPlayerOne.innerHTML = play1.coins
                 popUpWin('The Dealer Win')
             } else if (dealer.score === play1.score) {
                 play1.coins += play1.betValue
                 showCoinsPlayerOne.innerHTML = play1.coins
-                popUpWin(`Draw`)
+                popUpWin(`Tie`)
             } else if (dealer.score < play1.score) {
                 play1.addEarnes(1);
                 showCoinsPlayerOne.innerHTML = play1.coins
                 popUpWin(`The ${play1.name} Win`)
             }
         }
-    }
-    // else if (round === `Three`) {
-    //     if (black > 21) {
-    //         popUpSplitBust(`Bust`)
-    //     }
-    // }
+    }    
 }
 // ----------------------------------------------------------------
 function turneTheCard(time) {
@@ -290,7 +175,6 @@ function turneTheCard(time) {
         buttonBat1.disabled = true
     }
 }
-
 // ----Button to Hit------------------------------------------------------------
 function hitPlay1(card) {
     $player1[play1.indToBoard].style.visibility = 'visible';
@@ -302,12 +186,13 @@ function hitPlay1(card) {
         play1.getHandScore();
     }
     play1.addindToBoard();
-    checkBlack(play1.score, play1.name, `Two`);//aqui 2
+    checkBlack(play1.score, play1.name, `Two`);
+    buttonDuble1.disabled = true
 }
 // ---button to stay -------------------------------------------------------------
 function stayPlay1(obj) {
     turneTheCard()
-    dealer.getHandScore()// caucula o score
+    dealer.getHandScore()
     dealerTurne(obj)
 }
 // ----------------------------------------------------------------
@@ -327,8 +212,8 @@ function dobuleDow(card) {
     checkBlack(play1.score, play1.name, `Two`);
     turneTheCard()
     dealer.getHandScore()
-    dealerTurne()
-}//aqui
+    apiCards('returToDealerTurne')
+}
 // ----Button Split------------------------------------------------------------
 let atrA;
 function screenHit() {
@@ -354,7 +239,6 @@ function screenHit() {
 
     return splitPlay1;
 }
-
 // ----Button Hit Split 1------------------------------------------------------------
 function hitSplit1(card) {
     if (splitCont === 1) {
@@ -395,7 +279,6 @@ function staySplit1() {
         dealerTurne()
     }
 }
-
 // ---------------------------------------------------------------
 function dealerTurne(card) {
     if (dealer.score < 17) {
@@ -418,7 +301,6 @@ function popUp(msg) {
     popupMessage.innerHTML = msg;
     closePopup.addEventListener('click', () => {
         popupWrapper.style.display = 'none';
-        dealerTurne()
     })
 };
 // ----pop Up No Bet-------------------------------
@@ -482,6 +364,7 @@ function restart() {
     })
     movesOn.forEach(e => e.disabled = true)
     buttonBat1.disabled = false
+    allCoinsOne.forEach(a => a.disabled = false)
 };
 // -------------------------------------------------
 allCoinsOne[0].addEventListener('click', () => {
@@ -541,9 +424,6 @@ movesOn[3].addEventListener('click', screenHit)
 movesOn[4].addEventListener('click', shuffleDraw)
 
 movesSplit.forEach(e => e.addEventListener('click', shuffleDraw))
-// movesSplit[0].addEventListener('click', shuffleDraw)
-// movesSplit[1].addEventListener('click', shuffleDraw)
-// movesSplit[2].addEventListener('click', shuffleDraw)
 
 // chamando a API para embaralhar comeco do jogo
 apiCards(`shuffle`)
