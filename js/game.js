@@ -122,6 +122,8 @@ function firstRound(card) {
 function checkBlack(black, player, round) {
     if (round === `One`) {
         if (black === 21 && player !== `Dealer`) {
+            play1.addEarnes(1);
+            showCoinsPlayerOne.innerHTML = play1.coins
             popUp(`${player} BlackJack`);
             turneTheCard()
             apiCards('returToDealerTurne')       
@@ -134,7 +136,7 @@ function checkBlack(black, player, round) {
                 if (play1.score > 21) {
                     popUpWin(`Tie`)
                 } else {
-                    play1.addEarnes(1.5);
+                    play1.addEarnes(1);
                     showCoinsPlayerOne.innerHTML = play1.coins
                     popUpWin(` Dealer Bust`)
                 }

@@ -34,6 +34,7 @@ class Player {
     addBet(coins) {
         this.betValue = this.betValue + coins
     }
+    
     addEarnes(times) {
         const total = this.betValue * times + this.betValue
         this.coins = this.coins + total
