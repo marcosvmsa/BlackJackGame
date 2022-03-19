@@ -7,18 +7,18 @@ class SplitObj {
         this.splitScore = 0;
     }
     addIndiceSplit() {
-        this.indiceSplit += 1
+        this.indiceSplit += 1;
     };
     addSplitCard(value) {
-        this.splitHand.push(value)
+        this.splitHand.push(value);
     };
     splitHandScore() {
-        this.score = this.splitHand.reduce((acc, card) => acc + card, 0)
+        this.score = this.splitHand.reduce((acc, card) => acc + card, 0);
     }
     splitFindAce() {
-        return this.splitHand.includes(11)
+        return this.splitHand.includes(11);
     }
     addSplitAceOne() {
-        this.hand[this.splitHand.indexOf(11)] = 1
+        this.hand[this.splitHand.indexOf(11)] = 1;
     }
 }

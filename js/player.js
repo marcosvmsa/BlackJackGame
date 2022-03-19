@@ -8,7 +8,8 @@ class Player {
         this.indToBoard = 0;
         this.score = 0;
         this.betValue = 0;
-    }
+    };
+
     addindToBoard() {
         this.indToBoard += 1
     };
@@ -25,28 +26,29 @@ class Player {
         this.betValue = 0;
         this.coins = this.coins
     };
+
     getHandScore() {
-        this.score = this.hand.reduce((acc, card) => acc + card, 0)
+        this.score = this.hand.reduce((acc, card) => acc + card, 0);
     };
 
     coninsDeduct(coin) {
-        this.coins = this.coins - coin
+        this.coins = this.coins - coin;
     };
+
     addBet(coins) {
-        this.betValue = coins
-        console.log(this.betValue)
-    }
+        this.betValue = coins;
+    };
     
     addEarnes(times) {
-        // const total = this.betValue * times 
-        this.betValue = this.betValue * times 
-        this.coins += this.betValue
-    }
+        this.betValue = this.betValue * times;
+        this.coins += this.betValue;
+    };
 
     findAce() {
-        return this.hand.includes(11)
-    }
+        return this.hand.includes(11);
+    };
+
     addAceOne() {
-        this.hand[this.hand.indexOf(11)] = 1
+        this.hand[this.hand.indexOf(11)] = 1;
     }
 }

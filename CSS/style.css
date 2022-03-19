@@ -2,12 +2,12 @@ body{
     max-width: 100%;
     max-height: 100%;
     margin: 0 auto ;
-}
+};
 
 h1{
     align-items: center;
     text-align: center;
-}
+};
 
 .dealerTable{
     display: flex;
@@ -15,7 +15,7 @@ h1{
     flex-direction: column;
     text-align: center;
     background-color: green;
-}
+};
 
 .players {    
     height: 50vh;
@@ -24,7 +24,7 @@ h1{
     justify-content: space-around;    
     text-align: center;
     align-content: center;    
-}
+};
 
 #playerOne,
 #playerTwo,
@@ -34,49 +34,49 @@ h1{
     flex-direction:column;
     text-align: center;
     align-content: center;
-}
+};
 
 .wrapperCoins{
     max-height: 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-} 
+}; 
 
 .buttonPlayer{
     max-height: 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
+};
 
 .cards{
     visibility: hidden;
-}
+};
 
 .cards + .cards{
     margin-left: -20px;
-}
+};
 
 .oneC,
 .fiveC,
 .tenC{
     border-radius: 100px;    
-}
+};
 
 #buttonPlayerOne{
     display: flex;
     align-items: flex-end;
-}
+};
 
 h2{
     font-size: 19px;
-}
+};
 
 span{
     padding: 0px 50px 0px 50px;
     border: 1px solid black;
-}
+};
 
 #popupWrapper{
     display: none;
@@ -86,7 +86,7 @@ span{
     left: 0;
     width: 80%;
     height: 80%;
-}
+};
 
 .popup{
     font-family: Arial;
@@ -98,19 +98,18 @@ span{
     background: white;
     position: relative;
     border: 5px solid black;
-}
+};
 
 .popup-close{
     position: absolute;
     top: 5px;
     right: 10px;
     cursor: pointer;
-}
-
+};
 
 .cardsPlayer1{
     position: relative;    
-}
+};
 
 .split{
     visibility: hidden;
@@ -122,7 +121,7 @@ span{
     width: 100%;
     height: 100px;    
     background-color: #ffffff70;
-}
+};
 
 .split1, 
 .split2,
@@ -133,26 +132,26 @@ span{
     margin-left: 2%;
     width: 25%;
     height: 150%;
-}
+};
 
 .wrapperSplitButtons{
     align-self: center ;
     width: 100%;    
-}
+};
 
 .cardsSplit + .cardsSplit{
     margin-left: -20px;
-}
+};
 
 .cardsSplit{
     visibility: hidden;
-}
+};
 
 .split1{
     margin-bottom: 8px;
-}
+};
+
 @media (max-width: 1003px) {
-    
     .players{
         background-color: green;
         display: flex;
@@ -170,10 +169,5 @@ span{
         background-color: green;
     }
    
-}
-/* Isso tem que acontecer quando fizer o split  */
-/* .coins,
-.buttonPlayer1{
-    pointer-events: none;
-    opacity: 0.1;
-} */
+};
+
